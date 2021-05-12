@@ -1,10 +1,10 @@
 import React from "react";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
-import { AuthProvider } from "./AuthProvider";
+import AuthProvider from "./AuthProvider";
 import Routes from "./Routes";
 
-export default function Providers() {
+const Providers: React.FC<any> = () => {
   return (
     <PaperProvider theme={theme}>
       <AuthProvider>
@@ -12,7 +12,7 @@ export default function Providers() {
       </AuthProvider>
     </PaperProvider>
   );
-}
+};
 
 const theme = {
   ...DefaultTheme,
@@ -23,3 +23,4 @@ const theme = {
     accent: "#50c878",
   },
 };
+export default Providers;
