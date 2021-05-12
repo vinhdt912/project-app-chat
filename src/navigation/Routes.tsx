@@ -4,7 +4,9 @@ import { AuthContext } from "./AuthProvider";
 import AuthStack from "./AuthStack";
 import HomeTab from "./HomeTab";
 
-export default function Routes() {
+const Routes: React.FC<any> = () => {
   const { user } = useContext(AuthContext);
   return <NavigationContainer>{user.email ? <HomeTab /> : <AuthStack />}</NavigationContainer>;
-}
+};
+
+export default Routes;

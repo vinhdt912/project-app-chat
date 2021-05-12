@@ -5,7 +5,7 @@ import RegisterScreen from "../screens/auth/register";
 
 const Stack = createStackNavigator();
 
-export default function AuthStack(props) {
+const AuthStack: React.FC<any> = (props) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -18,4 +18,6 @@ export default function AuthStack(props) {
       <Stack.Screen name="Register" component={RegisterScreen} />
     </Stack.Navigator>
   );
-}
+};
+
+export default AuthStack;

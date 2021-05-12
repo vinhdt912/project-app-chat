@@ -18,7 +18,7 @@ export const AuthContext = createContext({
   setError: null,
 });
 
-export const AuthProvider: React.FC<any> = ({ children }) => {
+const AuthProvider: React.FC<any> = ({ children }) => {
   const [user, setUser] = useState({
     id: "",
     displayName: "",
@@ -85,3 +85,5 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+export default AuthProvider;
