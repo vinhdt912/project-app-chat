@@ -8,7 +8,7 @@ import { validateEmail, validatePassword } from "../../../containers/utils/index
 import { AuthContext } from "../../../navigation/AuthProvider";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen: React.FC<any> = ({ navigation }) => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

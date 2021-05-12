@@ -4,7 +4,7 @@ import { TextInput } from "react-native-paper";
 import styles from "../../../../assets/styles/_people";
 import { MAIN_COLOR } from "../../../../containers/constants/index";
 
-export default function SearchBar({ peopleList, setPeopleList }) {
+const SearchBar: React.FC<any> = ({ peopleList, setPeopleList }) => {
   return (
     <SafeAreaView style={styles?.searchBarContainer}>
       <TextInput
@@ -15,11 +15,14 @@ export default function SearchBar({ peopleList, setPeopleList }) {
         left={<TextInput.Icon name="magnify" color={MAIN_COLOR} size={30} />}
         onChangeText={(text) => {
           const newPeopleList = peopleList.filter(
-            (people) => people.name.toLowerCase().search(text.toLowerCase()) >= 0 || people.email.toLowerCase().search(text.toLowerCase()) >= 0
+            (people) =>
+              people.name.toLowerCase().search(text.toLowerCase()) >= 0 || people.email.toLowerCase().search(text.toLowerCase()) >= 0
           );
           setPeopleList(newPeopleList);
         }}
       />
     </SafeAreaView>
   );
-}
+};
+
+export default SearchBar;

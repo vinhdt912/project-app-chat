@@ -8,7 +8,7 @@ import { MAIN_COLOR } from "../../../containers/constants/index";
 import { AuthContext } from "../../../navigation/AuthProvider";
 import { validateEmail, validatePassword } from "../../../containers/utils/index";
 
-const LoginScreen = ({ navigation, route }) => {
+const LoginScreen: React.FC<any> = ({ navigation, route }) => {
   const [email, setEmail] = useState(route?.params?.email ? route?.params?.email : "");
   const [password, setPassword] = useState(route?.params?.password ? route?.params?.password : "");
   const [hidePassword, setHidePassword] = useState(true);

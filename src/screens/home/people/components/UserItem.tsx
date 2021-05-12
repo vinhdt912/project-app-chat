@@ -7,7 +7,7 @@ import { MAIN_COLOR } from "../../../../containers/constants/index";
 import { useDispatch } from "react-redux";
 import { addToFavorite } from "../../../../containers/redux/actions/people";
 
-export default function UserItem({ user }) {
+const UserItem: React.FC<any> = ({ user }) => {
   const [liked, setLiked] = useState(false);
   const dispatch = useDispatch();
 
@@ -30,4 +30,6 @@ export default function UserItem({ user }) {
       />
     </View>
   );
-}
+};
+
+export default UserItem;

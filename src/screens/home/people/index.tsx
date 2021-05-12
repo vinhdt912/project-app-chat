@@ -5,8 +5,8 @@ import styles from "../../../assets/styles/_people";
 import PeopleList from "./components/PeopleList";
 import SearchBar from "./components/SearchBar";
 
-export default function PeopleScreen() {
-  const people = useSelector((state) => state.people.list);
+const PeopleScreen: React.FC<any> = () => {
+  const people = useSelector((state: any) => state.people.list);
   const [peopleList, setPeopleList] = useState(people);
   return (
     <SafeAreaView style={styles.peopleContainer}>
@@ -14,4 +14,6 @@ export default function PeopleScreen() {
       <PeopleList data={peopleList} />
     </SafeAreaView>
   );
-}
+};
+
+export default PeopleScreen;

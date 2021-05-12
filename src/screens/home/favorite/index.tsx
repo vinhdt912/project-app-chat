@@ -1,10 +1,12 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-export default function UserScreen() {
+const FavoriteScreen: React.FC<any> = () => {
   return (
     <View>
       <Text>Favorite Screen</Text>
     </View>
   );
-}
+};
+
+export default FavoriteScreen;
