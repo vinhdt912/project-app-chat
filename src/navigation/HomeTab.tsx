@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 import { Ionicons } from "react-native-vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { DATA_USER, MAIN_COLOR } from "../containers/constants/index";
-import { updatePeople } from "../containers/redux/actions/people";
+import { uploadPeopleAction } from "../containers/redux/actions/people";
 import ChatScreen from "../screens/home/chat";
 import MessageScreen from "../screens/home/message";
 import PeopleScreen from "../screens/home/people";
@@ -37,7 +37,7 @@ const HomeTab: React.FC<any> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updatePeople(DATA_USER));
+    dispatch(uploadPeopleAction(DATA_USER));
     return () => {};
   }, []);
 
