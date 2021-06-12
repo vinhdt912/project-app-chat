@@ -1,15 +1,14 @@
 import React, { createContext, useState } from "react";
 import { firebase } from "../firebase";
-import admin from "firebase-admin";
+import admin, { database } from "firebase-admin";
+import { useDispatch } from "react-redux";
+import { loginAction, logoutAction } from "../containers/redux/actions/auth";
+import { uploadPeopleAction } from "../containers/redux/actions/people";
 
 export const AuthContext = createContext({
   register: null,
   loading: null,
-  user: {
-    id: "",
-    displayName: "",
-    email: "",
-  },
+  user: { uid: "", email: "", displayName: "", token: "" },
   setUser: null,
   setLoading: null,
   login: null,
@@ -20,12 +19,16 @@ export const AuthContext = createContext({
 
 const AuthProvider: React.FC<any> = ({ children }) => {
   const [user, setUser] = useState({
-    id: "",
-    displayName: "",
+    uid: "",
     email: "",
+    displayName: "",
+    token: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
+
   return (
     <AuthContext.Provider
       value={{
@@ -38,23 +41,35 @@ const AuthProvider: React.FC<any> = ({ children }) => {
         login: async (email, password) => {
           setLoading(true);
           try {
+            await database()
+              .ref("/users")
+              .on("value", (querySnapShot) => {
+                let data = querySnapShot.val() ? querySnapShot.val() : {};
+                let userList = { ...data };
+                console.log(userList);
+                uploadPeopleAction(userList);
+              });
             await firebase
               .auth()
               .signInWithEmailAndPassword(email, password)
               .then((credential) => {
-                // TODO start a user chat session and log the user in
                 setError("");
-                setUser({
-                  id: credential.user.uid,
-                  displayName: credential.user.displayName,
+                const newUser = {
+                  uid: credential.user.uid,
                   email: credential.user.email,
-                });
+                  displayName: credential.user.displayName,
+                  token: credential.user.refreshToken,
+                };
+                setUser(newUser);
+                // console.log(newUser);
+                dispatch(loginAction(newUser));
               });
           } catch (e) {
             setError(e.message);
           }
           setLoading(false);
         },
+
         register: async (displayName, email, password) => {
           setLoading(true);
           try {
@@ -62,22 +77,33 @@ const AuthProvider: React.FC<any> = ({ children }) => {
               .auth()
               .createUserWithEmailAndPassword(email, password)
               .then((credential) => {
-                // TODO start a user chat session and log the user in
                 setError("");
-                credential.user.updateProfile({ displayName: displayName }).then(async () => {});
+                credential.user.updateProfile({ displayName: displayName }).then(async () => {
+                  // TODO
+                });
               });
           } catch (e) {
             setError(e.message);
           }
           setLoading(false);
         },
+
         logout: async () => {
-          // TODO
-          setUser({
-            id: "",
-            email: "",
-            displayName: "",
-          });
+          setLoading(true);
+          await firebase
+            .auth()
+            .signOut()
+            .then(() => {
+              setUser({
+                uid: "",
+                email: "",
+                displayName: "",
+                token: "",
+              });
+
+              dispatch(logoutAction());
+            });
+          setLoading(false);
         },
       }}
     >

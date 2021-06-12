@@ -1,11 +1,9 @@
-import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
-import styles from "../../../../assets/styles/_people";
+import React, { useState } from "react";
+import { Image, Text, View } from "react-native";
 import { Ionicons } from "react-native-vector-icons";
-import { useState } from "react";
-import { MAIN_COLOR } from "../../../../containers/constants/index";
 import { useDispatch } from "react-redux";
-import { addToFavorite } from "../../../../containers/redux/actions/people";
+import styles from "../../../../assets/styles/_people";
+import { MAIN_COLOR } from "../../../../containers/constants/index";
 
 const UserItem: React.FC<any> = ({ user }) => {
   const [liked, setLiked] = useState(false);
@@ -24,7 +22,6 @@ const UserItem: React.FC<any> = ({ user }) => {
         size={40}
         color={liked ? MAIN_COLOR : "gray"}
         onPress={() => {
-          dispatch(addToFavorite(user));
           setLiked(!liked);
         }}
       />

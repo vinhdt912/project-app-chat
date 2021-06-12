@@ -1,9 +1,8 @@
-export const login = (user) => ({
+export const loginAction = (user) => ({
   type: "LOGIN_ACTION",
   payload: user,
 });
 
-export const logout = (payload) => ({
+export const logoutAction = () => ({
   type: "LOGOUT_ACTION",
-  payload: payload,
 });

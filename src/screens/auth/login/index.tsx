@@ -2,18 +2,16 @@ import * as React from "react";
 import { useContext, useState } from "react";
 import { Image, Text, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import { useDispatch } from "react-redux";
 import styles from "../../../assets/styles/_login";
 import { MAIN_COLOR } from "../../../containers/constants/index";
-import { AuthContext } from "../../../navigation/AuthProvider";
 import { validateEmail, validatePassword } from "../../../containers/utils/index";
+import { AuthContext } from "../../../navigation/AuthProvider";
 
 const LoginScreen: React.FC<any> = ({ navigation, route }) => {
   const [email, setEmail] = useState(route?.params?.email ? route?.params?.email : "");
   const [password, setPassword] = useState(route?.params?.password ? route?.params?.password : "");
   const [hidePassword, setHidePassword] = useState(true);
   const { login, loading, error } = useContext(AuthContext);
-  const dispatch = useDispatch();
 
   const checkAll = () => {
     if (validateEmail(email) && validatePassword(password)) return true;

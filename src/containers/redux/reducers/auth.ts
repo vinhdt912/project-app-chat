@@ -1,8 +1,8 @@
 const initialState = {
-  id: "",
+  uid: "",
   displayName: "",
   email: "",
-  avatarUrl: "",
+  token: "",
 };
 
 const authReducer = (state = initialState, action) => {
@@ -12,10 +12,10 @@ const authReducer = (state = initialState, action) => {
     }
     case "LOGOUT_ACTION": {
       return {
-        id: "",
-        name: "",
+        uid: "",
+        displayName: "",
         email: "",
-        avatarUrl: "",
+        token: "",
       };
     }
     default: {
